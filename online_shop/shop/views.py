@@ -73,7 +73,7 @@ def filter_by_category(request, slug):
     result = []
     category = Category.objects.filter(slug=slug).first()
     [result.append(product)
-        for product in Product.objecs.filter(category=category.id).all()]
+        for product in Product.objects.filter(category=category.id).all()]
 
     context = {'products': pagination(request, result)}
     return render(request, 'home_page.html', context)

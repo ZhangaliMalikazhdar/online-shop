@@ -42,14 +42,17 @@ def user_register(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+            print('1111111')
             user = User.objects.create_user(
                 data['email'], data['full_name'], data['password']
             )
+            print('222222')
+            user.save()
             return redirect('accounts:user_login')
-        else:
-            form = UserRegistrationForm()
-        context = {'title': 'Signup', 'form': form}
-        return render(request, 'register.html', context)
+    else:
+        form = UserRegistrationForm()
+    context = {'title': 'Signup', 'form': form}
+    return render(request, 'register.html', context)
 
 
 def user_login(request):
@@ -75,7 +78,7 @@ def user_login(request):
 
 
 def user_logout(request):
-    login(request)
+    logout(request)
     return redirect('accounts:user_login')
 
 
