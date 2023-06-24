@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>list of products</h2>
+<h3><a href="{% url 'manager:list-category' %}">to category</a></h3>
+<h5><a href="{% url 'manager:create-product' %}">create product</a></h5>
+{% for product in products %}
+    <p>{{ product.name }}
+        <a href="{% url 'manager:edit-product' product.pk %}">edit</a>
+        <a href="{% url 'manager:delete-product' product.pk %}">delete</a>
+    </p>
+{% endfor %}
+{% endblock %}
