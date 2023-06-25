@@ -12,6 +12,9 @@ class Category(models.Model):
     # is_sub = models.BooleanField(default=False)
     slug = models.SlugField(max_length=150, unique=True)
 
+    class Meta:
+        ordering = ('name',)
+
     def __str__(self):
         return self.name
 

@@ -29,14 +29,19 @@ class CreateCategory(CreateView):
     fields = ['name', 'slug']
     template_name = 'create-category.html'
 
-    def get_success_url(self):
-        return redirect('manager:list-category')
+    success_url = '/manager/'
+    # def get_success_url(self):
+    #     return redirect('manager:list-category')
 
 
 class EditCategory(UpdateView):
     model = Category
     fields = ['name', 'slug']
     template_name = 'edit-category.html'
+
+    success_url = '/manager/'
+    # def get_success_url(self):
+    #     return redirect('/')
 
 
 class DeleteCategory(DeleteView):
