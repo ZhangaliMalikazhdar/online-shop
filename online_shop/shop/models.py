@@ -10,7 +10,7 @@ class Category(models.Model):
     #     related_name='sub_categories', null=True, blank=True
     # )
     # is_sub = models.BooleanField(default=False)
-    slug = models.SlugField(max_length=150, unique=True)
+    # slug = models.SlugField(max_length=150, unique=True)
 
     class Meta:
         ordering = ('name',)
@@ -19,11 +19,11 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('shop:product_detail', kwargs={'slug': self.slug})
+        return reverse('manager:list-category')
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        return super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.name)
+    #     return super().save(*args, **kwargs)
 
 
 class Product(models.Model):
@@ -32,7 +32,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.IntegerField()
     date_created = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(unique=True)
+    # slug = models.SlugField(unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
 
     class Meta:
@@ -42,8 +42,11 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('shop:product_detail', kwargs={'slug': self.slug})
+        return reverse('manager:list-product')
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        return super().save(*args, **kwargs)
+    def get_buy_url(self):
+        return reverse('shop:product_detail', kwargs={'pk': self.pk})
+
+    # def save(self, *args, **kwargs):
+    #     self.pk = slugify(self.name)
+    #     return super().save(*args, **kwargs)

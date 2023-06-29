@@ -7,7 +7,7 @@ from shop.models import Product
 
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=100, unique=True)
-    full_name = models.CharField(max_length=100)
+    nickname = models.CharField(max_length=100)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     likes = models.ManyToManyField(Product, blank=True, related_name='likes')
@@ -16,10 +16,10 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['full_name']
+    REQUIRED_FIELDS = ['nickname']
 
     def __str__(self):
-        return self.email
+        return self.nickname
 
     def has_perm(self, perm, obj=None):
         return True

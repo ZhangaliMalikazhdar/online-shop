@@ -14,7 +14,7 @@ class Order(models.Model):
         ordering = ('-created',)
 
     def __str__(self):
-        return f"{self.user.full_name} - order id: {self.id}"
+        return f"{self.user.nickname} - order id: {self.id}"
 
     @property
     def get_total_price(self):

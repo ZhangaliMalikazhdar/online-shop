@@ -22,9 +22,9 @@ class UserRegistrationForm(forms.Form):
             attrs={'class': 'form-control', 'placeholder': 'email'}
         )
     )
-    full_name = forms.CharField(
+    nickname = forms.CharField(
         widget=forms.TextInput(
-            attrs={'class': 'form-control', 'placeholder': 'full_name'}
+            attrs={'class': 'form-control', 'placeholder': 'nickname'}
         )
     )
     password = forms.CharField(
@@ -50,4 +50,4 @@ class ManagerLoginForm(forms.Form):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['full_name', 'email']
+        fields = ['nickname', 'email']

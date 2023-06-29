@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<ul>
+    <li><a href="{% url 'manager:list-order' %}">order</a></li>
+    <li><a href="{% url 'manager:list-category' %}">category</a></li>
+    <li><a href="{% url 'manager:list-product' %}">product</a></li>
+<!--    <li><a href=""></a></li>-->
+</ul>
+{% endblock %}

@@ -16,7 +16,7 @@ def add_to_cart(request, product_id):
         data = form.cleaned_data
         cart.add(product=product, quantity=data['quantity'])
         messages.success(request, 'Added to your cart!', 'info')
-    return redirect('shop:product_detail', slug=product.slug)
+    return redirect('shop:product_detail', pk=product.pk)
 
 
 @login_required

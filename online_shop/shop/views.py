@@ -25,9 +25,9 @@ def home_page(request):
     return render(request, 'home_page.html', context)
 
 
-def product_detail(request, slug):
+def product_detail(request, pk):
     form = QuantityForm()
-    product = get_object_or_404(Product, slug=slug)
+    product = get_object_or_404(Product, pk=pk)
     related_products = Product.objects.filter(category=product.category).all()[:5]
     context = {
         'name': product.name,
@@ -36,7 +36,7 @@ def product_detail(request, slug):
         'favorites': 'favorites',
         'related_products': related_products
     }
-    if request.user.likes.filter(id=product.id).first():
+    if request.user.likes.filter(pk=product.pk).first():
         context['favorites'] = 'remove'
     return render(request, 'product_detail.html', context)
 
@@ -45,7 +45,7 @@ def product_detail(request, slug):
 def add_to_favorites(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     request.user.likes.add(product)
-    return redirect('shop:product_detail', slug=product.slug)
+    return redirect('shop:product_detail', pk=product.pk)
 
 
 @login_required
@@ -69,9 +69,9 @@ def search(request):
     return render(request, 'home_page.html', context)
 
 
-def filter_by_category(request, slug):
+def filter_by_category(request, pk):
     result = []
-    category = Category.objects.filter(slug=slug).first()
+    category = Category.objects.filter(pk=pk).first()
     [result.append(product)
         for product in Product.objects.filter(category=category.id).all()]
 

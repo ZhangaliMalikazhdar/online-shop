@@ -4,6 +4,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
 from shop.models import *
 from .forms import *
+from orders.models import Order
 
 
 # crud Category Product
@@ -26,7 +27,7 @@ class ListProduct(ListView):
 
 class CreateCategory(CreateView):
     model = Category
-    fields = ['name', 'slug']
+    fields = ['name']
     template_name = 'create-category.html'
 
     success_url = '/manager/'
@@ -36,7 +37,7 @@ class CreateCategory(CreateView):
 
 class EditCategory(UpdateView):
     model = Category
-    fields = ['name', 'slug']
+    fields = ['name']
     template_name = 'edit-category.html'
 
     success_url = '/manager/'
@@ -52,7 +53,7 @@ class DeleteCategory(DeleteView):
 
 class CreateProduct(CreateView):
     model = Product
-    fields = ['name', 'image', 'description', 'price', 'slug', 'category']
+    fields = ['name', 'image', 'description', 'price', 'category']
     # form_class = CreateProductForm
     template_name = 'create-product.html'
     
@@ -66,7 +67,7 @@ class CreateProduct(CreateView):
 
 class EditProduct(UpdateView):
     model = Product
-    fields = ['name', 'slug', 'description', 'image', 'price', 'category']
+    fields = ['name', 'description', 'image', 'price', 'category']
     template_name = 'edit-product.html'
 
     
@@ -74,3 +75,9 @@ class DeleteProduct(DeleteView):
     model = Product
     success_url = reverse_lazy('manager:list-product')
     template_name = 'delete-product.html'
+
+
+class ListOrder(ListView):
+    model = Order
+    template_name = 'list-order.html'
+    context_object_name = 'orders'

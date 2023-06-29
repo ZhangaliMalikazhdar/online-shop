@@ -44,7 +44,7 @@ def user_register(request):
             data = form.cleaned_data
             print('1111111')
             user = User.objects.create_user(
-                data['email'], data['full_name'], data['password']
+                data['email'], data['nickname'], data['password']
             )
             print('222222')
             user.save()
