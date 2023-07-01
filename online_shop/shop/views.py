@@ -8,7 +8,7 @@ from cart.forms import QuantityForm
 
 
 def pagination(request, list_objects):
-    paginator = Paginator(list_objects, 20)
+    paginator = Paginator(list_objects, 10)
     page_number = request.GET.get('page')
     try:
         page_obj = paginator.get_page(page_number)
@@ -25,6 +25,7 @@ def home_page(request):
     return render(request, 'home_page.html', context)
 
 
+@login_required
 def product_detail(request, pk):
     form = QuantityForm()
     product = get_object_or_404(Product, pk=pk)

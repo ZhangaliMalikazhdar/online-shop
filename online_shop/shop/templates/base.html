@@ -14,28 +14,13 @@
           crossorigin="anonymous">
     <title>{% if title %} {{ title }} {% else %} Django Online Shop {% endif %}</title>
 </head>
-<body>
-  <header class="p-2 border-bottom">
-    <div class="container">
+<body style="background-color:  #fddbff ">
+  <header class="p-2">
+    <div class="container rounded" style="background-color:  #e333ff ">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <!-- cart icon -->
-        {% if request.user.is_authenticated %}
-        <b class="text-primary">{{ cart_count }}</b>
-        {% endif %}
-        <a href="{% url 'cart:show_cart' %}" class="text-primary mt-2 me-2"><i class="material-icons h3">&#xe8cc;</i></a>
-        <!-- favorite icon -->
-        {% if request.user.is_authenticated %}
-        <b class="text-primary">{{ request.user.get_likes_count}}</b>
-        {% endif %}
-        <a href="{% url 'shop:favorites' %}" class="text-primary mt-2 me-2"><i class="material-icons h3">&#xe87d;</i></a>
-        <!-- Menu -->
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{% url 'shop:home_page' %}" class="nav-link px-2 text-dark">Home</a></li>
-<!--          <li><a href="#" class="nav-link px-2 text-dark">Shop</a></li>-->
-          <!-- categories dropdown -->
           <div class="dropdown text-end">
-            <a href="#" class=" mt-2 me-1 ms-1 text-dark d-block link-dark text-decoration-none dropdown-toggle"
-               data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+            <a href="#" class=" mt-0 me-1 ms-1 text-light d-block link-dark text-decoration-none dropdown-toggle"
+               data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons h3">&#x2630;</i></a>
             <ul class="dropdown-menu" aria-labelledby="dropdownUser1">
               {% for category in categories %}
               <!-- check if category is parent -->
@@ -54,10 +39,25 @@
                 {% endif %}
               {% endfor %}
             </ul>
-            {% if user.is_admin %}
-            <a class="dropdown-item" href="{% url 'manager:main-page' %}">Manage</a>
-            {% endif %}
           </div>
+        <!-- cart icon -->
+        {% if request.user.is_authenticated %}
+        <b class="text-primary">{{ cart_count }}</b>
+        {% endif %}
+        <a href="{% url 'cart:show_cart' %}" class="text-primary mt-2 me-2"><i class="material-icons h3">&#xe8cc;</i></a>
+        <!-- favorite icon -->
+        {% if request.user.is_authenticated %}
+        <b class="text-primary">{{ request.user.get_likes_count}}</b>
+        {% endif %}
+        <a href="{% url 'shop:favorites' %}" class="text-primary mt-2 me-2"><i class="material-icons h3">&#xe87d;</i></a>
+        <!-- Menu -->
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{% url 'shop:home_page' %}" class="nav-link px-2 text-dark">Home</a></li>
+          {% if user.is_admin %}
+          <li><a class="nav-link px-2 text-dark" href="{% url 'manager:main-page' %}">Manage</a></li>
+          {% endif %}
+<!--          <li><a href="#" class="nav-link px-2 text-dark">Shop</a></li>-->
+          <!-- categories dropdown -->
 <!--          <li><a href="#" class="nav-link px-2 text-dark">FAQs</a></li>-->
 <!--          <li><a href="#" class="nav-link px-2 text-dark">About</a></li>-->
         </ul>
